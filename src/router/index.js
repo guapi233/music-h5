@@ -1,23 +1,26 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+const Recommend = () =>
+  import(/* webpackChunkName: "recommend" */ "components/recommend/recommend");
+
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/",
-  //   redirect: "/recommend",
-  // },
-  // {
-  //   path: "/recommend",
-  //   component: Recommend,
-  //   children: [
-  //     {
-  //       path: ":id",
-  //       component: Disc,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/",
+    redirect: "/recommend",
+  },
+  {
+    path: "/recommend",
+    component: Recommend,
+    // children: [
+    //   {
+    //     path: ":id",
+    //     component: Disc,
+    //   },
+    // ],
+  },
   // {
   //   path: "/singer",
   //   component: Singer,
