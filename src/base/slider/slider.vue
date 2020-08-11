@@ -19,6 +19,9 @@
 </template>
 
 <script>
+import BetterScroll from "better-scroll";
+import { addClass } from "common/js/dom";
+
 export default {
   data() {
     return {
