@@ -1,9 +1,7 @@
 <template>
   <div class="recommend" ref="recommend">
     <!-- 在这一层做引用，初始化BScroll，数据加载后在渲染，要记得加上data -->
-    <!-- 暂时占位 -->
-    <div class="recommend-content">
-      <!-- <scroll ref="scroll" class="recommend-content" :data="discList"> -->
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <!-- BScroll的层级是父子级，子级只有第一个元素才会滚动，想要下面两个同级的div同时滚动，需要在外层包裹一层div，作为外层的一个子元素， -->
       <div>
         <!-- 从服务端加载数据，会有延迟，等抓到数据后，在加载slider组件，这样slider里的mounted周期就能拿到数据了 -->
@@ -17,7 +15,7 @@
             </div>
           </slider>
         </div>
-        <!-- <div class="recommend-list">
+        <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
             <li
@@ -35,31 +33,33 @@
               </div>
             </li>
           </ul>
-        </div>-->
+        </div>
       </div>
       <!-- loading -->
       <!-- <div class="loading-container" v-show="!discList.length">
         <loading></loading>
       </div>-->
-    </div>
-    <!-- </scroll> -->
+    </scroll>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Slider from "base/slider/slider";
-import { getRecommend } from "api/recommend";
+import Scroll from "base/scroll/scroll";
+import { getRecommend, getDiscList } from "api/recommend";
 import { ERR_OK } from "api/config";
 
 export default {
   data() {
     return {
-      banners: []
+      banners: [],
+      discList: []
     };
   },
   created() {
     this._getRecommed();
+    this._getDiscList();
   },
   methods: {
     /**
@@ -73,6 +73,16 @@ export default {
         }
       });
     },
+    /**
+     * 获取歌单列表
+     */
+    _getDiscList() {
+      getDiscList().then(res => {
+        if (res.code === ERR_OK) {
+          this.discList = res.data.list;
+        }
+      });
+    },
     loadImg() {
       // 一张图片渲染就行了
       if (!this.checkLoaded) {
@@ -82,7 +92,8 @@ export default {
     }
   },
   components: {
-    Slider
+    Slider,
+    Scroll
   }
 };
 </script>
