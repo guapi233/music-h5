@@ -2,7 +2,10 @@
   <div id="app" @touchmove.prevent>
     <m-header></m-header>
     <tab></tab>
-    <router-view />
+    <!-- 确保tab切换不会导致重新加载请求 -->
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
