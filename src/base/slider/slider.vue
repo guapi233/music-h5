@@ -172,7 +172,7 @@ export default {
     refresh() {
       if (this.slider) {
         this._setSliderWidth(true);
-        this.slide.refresh();
+        this.slider.refresh();
       }
     }
   }
