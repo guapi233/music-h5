@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 const Recommend = () =>
   import(/* webpackChunkName: "recommend" */ "components/recommend/recommend");
+const Singer = () =>
+  import(/* webpackChunkName:'singer' */ "components/singer/singer");
 
 Vue.use(VueRouter);
 
@@ -21,16 +23,16 @@ const routes = [
     //   },
     // ],
   },
-  // {
-  //   path: "/singer",
-  //   component: Singer,
-  //   children: [
-  //     {
-  //       path: ":id",
-  //       component: SingerDetail,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/singer",
+    component: Singer,
+    // children: [
+    //   {
+    //     path: ":id",
+    //     component: SingerDetail,
+    //   },
+    // ],
+  },
   // {
   //   path: "/rank",
   //   component: Rank,
