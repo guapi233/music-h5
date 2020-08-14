@@ -4,8 +4,16 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    // 歌手信息
+    singer: {},
+  },
   mutations: {},
+  getters: {
+    singer(state) {
+      return state.singer;
+    },
+  },
   actions: {},
-  modules: {}
+  modules: {},
 });
