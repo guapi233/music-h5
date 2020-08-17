@@ -22,6 +22,26 @@ module.exports = {
           onProxyReq.setHeader("referer", "https://c.y.qq.com/");
         },
       },
+      "/api/lyric": {
+        target: "https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api/lyric": "",
+        },
+        onProxyReq(onProxyReq, req, res) {
+          onProxyReq.setHeader("referer", "https://c.y.qq.com/");
+        },
+      },
+      "/api/getPurlUrl": {
+        target: "https://u.y.qq.com/cgi-bin/musicu.fcg",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api/getPurlUrl": "",
+        },
+        onProxyReq(onProxyReq, req, res) {
+          onProxyReq.setHeader("referer", "https://c.y.qq.com/");
+        },
+      },
     },
   },
 };
