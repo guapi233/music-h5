@@ -5,6 +5,10 @@ const Recommend = () =>
   import(/* webpackChunkName: "recommend" */ "components/recommend/recommend");
 const Singer = () =>
   import(/* webpackChunkName:'singer' */ "components/singer/singer");
+const SingerDetail = () =>
+  import(
+    /* webpackChunkName:'singer' */ "components/singer-detail/singer-detail"
+  );
 
 Vue.use(VueRouter);
 
@@ -26,12 +30,12 @@ const routes = [
   {
     path: "/singer",
     component: Singer,
-    // children: [
-    //   {
-    //     path: ":id",
-    //     component: SingerDetail,
-    //   },
-    // ],
+    children: [
+      {
+        path: ":id",
+        component: SingerDetail,
+      },
+    ],
   },
   // {
   //   path: "/rank",
