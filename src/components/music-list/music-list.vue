@@ -41,8 +41,8 @@ import Scroll from "base/scroll/scroll";
 import Loading from "base/loading/loading";
 import SongList from "base/song-list/song-list";
 import { prefixStyle } from "common/js/dom";
-// import { playlistMixin } from "common/js/mixin";
-// import { mapActions } from "vuex";
+import { playlistMixin } from "common/js/mixin";
+import { mapActions } from "vuex";
 
 const RESERVED_HEIGHT = 40;
 // 自动加前缀
@@ -50,7 +50,7 @@ const transform = prefixStyle("transform");
 const backdrop = prefixStyle("backdrop-filter");
 
 export default {
-  // mixins: [playlistMixin],
+  mixins: [playlistMixin],
   props: {
     bgImage: {
       type: String,
@@ -95,11 +95,11 @@ export default {
     this.$refs.list.$el.style.top = `${this.imageHeight}px`;
   },
   methods: {
-    // handlePlaylist(playList) {
-    //   const bottom = playList.length > 0 ? "60px" : "";
-    //   this.$refs.list.$el.style.bottom = bottom;
-    //   this.$refs.list.refresh();
-    // },
+    handlePlaylist(playList) {
+      const bottom = playList.length > 0 ? "60px" : "";
+      this.$refs.list.$el.style.bottom = bottom;
+      this.$refs.list.refresh();
+    },
     // 派发的scroll事件可以监听到滚动位置
     scroll(pos) {
       this.scrollY = pos.y;
@@ -121,8 +121,8 @@ export default {
       this.randomPlay({
         list: this.songs
       });
-    }
-    // ...mapActions(["selectPlay", "randomPlay"])
+    },
+    ...mapActions(["selectPlay", "randomPlay"])
   },
   watch: {
     // 监听滑动
