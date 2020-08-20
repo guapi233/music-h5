@@ -13,6 +13,8 @@ const Disc = () => import(/* webpackChunkName:'disc' */ "components/disc/disc");
 const TopList = () =>
   import(/* webpackChunkName:'toplist' */ "components/top-list/top-list");
 const Rank = () => import(/* webpackChunkName:'rank' */ "components/rank/rank");
+const Search = () =>
+  import(/* webpackChunkName:'search' */ "components/search/search");
 
 Vue.use(VueRouter);
 
@@ -51,16 +53,16 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: "/search",
-  //   component: Search,
-  //   children: [
-  //     {
-  //       path: ":id",
-  //       component: SingerDetail,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/search",
+    component: Search,
+    children: [
+      {
+        path: ":id",
+        component: SingerDetail,
+      },
+    ],
+  },
   // {
   //   path: "/user",
   //   component: UserCenter,
