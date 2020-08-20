@@ -42,6 +42,17 @@ module.exports = {
           onProxyReq.setHeader("referer", "https://c.y.qq.com/");
         },
       },
+      "/api/getCdInfo": {
+        target:
+          "https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg",
+        changeOrigin: true,
+        pathRewrite: {
+          "/api/getCdInfo": "",
+        },
+        onProxyReq(onProxyReq, req, res) {
+          onProxyReq.setHeader("referer", "https://c.y.qq.com/");
+        },
+      },
     },
   },
 };

@@ -44,14 +44,17 @@
   </div>
 </template>
 
-<script>
-import Slider from "base/slider/slider";
-import Scroll from "base/scroll/scroll";
+<script type="text/ecmascript-6">
 import Loading from "base/loading/loading";
+import Scroll from "base/scroll/scroll";
+import Slider from "base/slider/slider";
 import { getRecommend, getDiscList } from "api/recommend";
 import { ERR_OK } from "api/config";
+import { playlistMixin } from "common/js/mixin";
+import { mapMutations } from "vuex";
 
 export default {
+  mixins: [playlistMixin],
   data() {
     return {
       banners: [],
@@ -63,9 +66,16 @@ export default {
     this._getDiscList();
   },
   methods: {
+    // mini播放器mixin
+    handlePlaylist(playList) {
+      const bottom = playList.length > 0 ? "60px" : "";
+
+      this.$refs.recommend.style.bottom = bottom;
+      this.$refs.scroll.refresh();
+    },
     /**
      * @augments
-     * 获取qq音乐轮播数据
+     * 获取qq音乐数据
      */
     _getRecommed() {
       getRecommend().then(res => {
@@ -74,6 +84,7 @@ export default {
         }
       });
     },
+
     /**
      * 获取歌单列表
      */
@@ -84,13 +95,25 @@ export default {
         }
       });
     },
+    /**
+     * 监听到banner图加载后，重新计算scrool的高度
+     */
     loadImg() {
       // 一张图片渲染就行了
       if (!this.checkLoaded) {
-        // this.$refs.scroll.refresh();
+        this.$refs.scroll.refresh();
         this.checkLoaded = true;
       }
-    }
+    },
+    selectItem(item) {
+      this.$router.push({
+        path: `/recommend/${item.dissid}`
+      });
+      this.setDisc(item);
+    },
+    ...mapMutations({
+      setDisc: "SET_DISC"
+    })
   },
   components: {
     Slider,
@@ -100,7 +123,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
 
 .recommend {
